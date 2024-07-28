@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "599341912928",
+    "firebase_url": "https://nivelavanzadoappmoviles-91923-default-rtdb.firebaseio.com",
+    "project_id": "nivelavanzadoappmoviles-91923",
+    "storage_bucket": "nivelavanzadoappmoviles-91923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599341912928:android:b3f00c2479d741e7b24405",
+        "android_client_info": {
+          "package_name": "aplicacionesmoviles.avanzado.todosalau.appmovilportafolioreto2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBty4mMraOBYMWtroHvuhXV-4M83yTSO4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
