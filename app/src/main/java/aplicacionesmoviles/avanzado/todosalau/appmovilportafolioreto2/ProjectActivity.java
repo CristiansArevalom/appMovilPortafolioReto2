@@ -96,11 +96,12 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         // Inicializar la base de datos y el adaptador
         this.dao= new ProjectDAO(this);//validar
 
-       // presenter = new ProjectPresenterImpl(this, this); // @TODO validar para mover logica de projectActivity a presenter
+       presenter = new ProjectPresenterImpl(this, this); // @TODO validar para mover logica de projectActivity a presenter
 
         List<Project> projects = dao.getAllProjects();
         projectAdapter = new ProjectAdapter(this, R.layout.list_item_project, projects);
         listViewProjects.setAdapter(projectAdapter);
+
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
@@ -286,7 +287,6 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
     // Métodos de utilidad @todo completar los filtros
     private boolean areFieldsEmpty() {
         if (editTextName.getText().toString().trim().isEmpty() || editTextDescription.getText().toString().trim().isEmpty()) {
-
             Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -307,6 +307,44 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         if (areFieldsEmpty()) {
             return;
         }
+        String name = editTextName.getText().toString();
+        String description= editTextDescription.getText().toString();
+        String startDate= editTextStartDate.getText().toString();
+        String endDate=editTextEndDate.getText().toString();
+        String status=editTextStatus.getText().toString();
+        Project newProject = new Project(name, description,stringToDate(startDate),stringToDate(endDate),status);
+        presenter.addProject(newProject);
+        loadProjectsFromDatabase();
+        clearInputFields();
+    }
+
+    private void saveProject() {
+        if (areFieldsEmpty()) {
+            return;
+        }
+        String id = editTextId.getText().toString();
+        String name = editTextName.getText().toString();
+        String description= editTextDescription.getText().toString();
+        String startDate= editTextStartDate.getText().toString();
+        String endDate=editTextEndDate.getText().toString();
+        String status=editTextStatus.getText().toString();
+
+        Project updatedProject  = new Project(id,name, description,stringToDate(startDate),stringToDate(endDate),status);
+        presenter.updateProject(updatedProject);
+        loadProjectsFromDatabase();
+        buttonAdd.setText("Agregar");
+        clearInputFields();
+    }
+
+    public void deleteProject(Project project) {
+            presenter.deleteProject(project);
+            loadProjectsFromDatabase();
+    }
+    /*
+    private void addProject() {
+        if (areFieldsEmpty()) {
+            return;
+        }
 
         String name = editTextName.getText().toString();
         String description= editTextDescription.getText().toString();
@@ -322,7 +360,6 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         }
         loadProjectsFromDatabase();
         clearInputFields();
-
     }
 
 
@@ -345,7 +382,16 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         clearInputFields();
         Toast.makeText(this, "Producto actualizado exitosamente", Toast.LENGTH_SHORT).show();
     }
-
+        public void deleteProject(Project project) {
+        if (project.isDeleted()) {
+            Toast.makeText(this, "project ya está eliminado", Toast.LENGTH_SHORT).show();
+        } else {
+            dao.deleteProject(project.getId());
+            loadProjectsFromDatabase();
+            Toast.makeText(this, "Producto eliminado exitosamente", Toast.LENGTH_SHORT).show();
+        }
+    }
+*/
 
 
 
@@ -359,15 +405,7 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         buttonAdd.setText("Guardar");
     }
 
-    public void deleteProject(Project project) {
-        if (project.isDeleted()) {
-            Toast.makeText(this, "project ya está eliminado", Toast.LENGTH_SHORT).show();
-        } else {
-            dao.deleteProject(project.getId());
-            loadProjectsFromDatabase();
-            Toast.makeText(this, "Producto eliminado exitosamente", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
 
 
@@ -389,22 +427,25 @@ public class ProjectActivity extends AppCompatActivity implements IProjectView {
         }
     }
 
-    /***/
-
-
 
     @Override
     public void showProjects(List<Project> projectList) {
 
+        projectAdapter.clear();
+        projectAdapter.addAll(projectList);
+        projectAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMessage(String text) {
-
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 
     }
+
+
 }

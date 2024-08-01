@@ -12,4 +12,7 @@ public interface IProjectPresenter {
     void updateProject(Project obj);
 
     void deleteProject(Project obj);
+
+    void loadProjects();
+    void synchronizeData();
 }

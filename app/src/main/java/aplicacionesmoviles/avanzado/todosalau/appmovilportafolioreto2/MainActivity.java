@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Crear intent para cambio de actividad
-        Intent intent = new Intent(MainActivity.this, ProjectActivity.class);
+        Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
         finish();
 

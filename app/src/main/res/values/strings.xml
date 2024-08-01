@@ -10,6 +10,28 @@
     <string name="hint_endDate">Fecha Fin</string>
     <string name="hint_status">Estatus</string>
 
+
+    <!-- Textos de la vista de inicio de sesión -->
+    <string name="login_header_image_desc">Imagen del encabezado</string>
+    <string name="login_title_text">Iniciar sesión</string>
+    <string name="login_email_hint">Correo electrónico</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_button_text">Iniciar sesión</string>
+    <string name="login_register_text">¿No tienes una cuenta? Regístrate</string>
+
+
+
+    <!-- Textos de la vista de registro -->
+    <string name="register_header_image_desc">Imagen del encabezado</string>
+    <string name="register_title_text">Registrarse</string>
+    <string name="register_username_hint">Nombre de usuario</string>
+    <string name="register_email_hint">Correo electrónico</string>
+    <string name="register_password_hint">Contraseña</string>
+    <string name="register_button_text">Registrarse</string>
+    <string name="register_login_text">¿Ya tienes una cuenta? Inicia sesión</string>
+
+
+
     <string name="button_add">Agregar</string>
     <string name="button_get_sqlite">Ver SQLite</string>
     <string name="button_get_firebase">Ver Firebase</string>
